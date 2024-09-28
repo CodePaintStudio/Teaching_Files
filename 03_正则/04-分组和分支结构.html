@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 分组
+    const reg = /a+/ //匹配多个a
+    //希望匹配abababab这样
+    const reg2 = /ab+/ // 匹配abbbbbb
+    const reg3 = /(ab)+/ // 匹配ababab
+    console.log('ab'); // true
+    console.log('abab'); // true
+    console.log('ababab'); // true
+    
+
+    //分组捕获： 例如YYYY-MM-DD 替换成 MM/DD/YYYY      
+    const reg4 = /^\d{4}-\d{2}-\d{2}$/ // 这样是将reg4作为一个整体的gruop来进行匹配的，叫做Group0
+    const data = '2024-01-01' 
+    console.log(reg4.test(data)); //true
+    
+    const reg5 = /^(\d{4})-(\d{2})-(\d{2})$/
+    //这样整体成为Group0,\d{4}为Group1,\d{2}为Group2,\d{2}为Group3
+    // 可以通过$来获取某一组的内容
+    // $1就是YYYY
+    console.log(data.replace(reg5, '$2/$3/$1')); // 01/01/2024
+    
+    //非分组捕获: (?:\d{4})
+
+
+    // 分支结构 ： | 或操作
+    const str1 = '学前端'
+    const str2 = '学java'
+    const str3 = '学爬虫'
+    const reg6 = /前端|java/
+    console.log(reg6.test(str1)); // true
+    console.log(reg6.test(str2)); // true
+    console.log(reg6.test(str3)); // true
+    
+  </script>
+</body>
+</html>

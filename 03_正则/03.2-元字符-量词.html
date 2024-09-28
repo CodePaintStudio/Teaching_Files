@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // *: 0次或更多次
+    const reg = /^a*$/
+    console.log(reg.test('a')); // true
+    console.log(reg.test(''));// true
+    console.log(reg.test('aaaa'));// true
+    console.log(reg.test('b'));// false
+    // 0次或者更多次，但因为是精确匹配，所以是要么有a要么没a，但只能是a
+
+    // +： 1次或更多次
+    const reg2 = /^a+$/
+    console.log(reg2.test('a')); // true
+    console.log(reg2.test(''));// false
+    console.log(reg2.test('aaaa'));// true
+    console.log(reg2.test('b'));// false
+
+    // ?: 0次或1次
+    const reg3 = /^a?$/
+    console.log(reg3.test('a')); // true
+    console.log(reg3.test(''));// true
+    console.log(reg3.test('aaaa'));// false
+    console.log(reg3.test('b'));// false
+
+    // {n}: 只能有n次
+    // 只能写在a后面
+    const reg4 = /^a{3}$/
+    console.log(reg4.test('a')); // false
+    console.log(reg4.test(''));// false
+    console.log(reg4.test('aaa'));// true
+    console.log(reg4.test('b'));// false
+    
+
+    //{n,}: 大于等于n次
+    //,两边都无空格，并必须是英文
+    const reg5 = /^a{3,}$/
+    console.log(reg5.test('a')); // false
+    console.log(reg5.test(''));// false
+    console.log(reg5.test('aaa'));// true
+    console.log(reg5.test('aaaaa'));// true
+
+    //{n,m}: n-m
+    //,两边都无空格，并必须是英文
+    const reg6 = /^a{3,5}$/
+    console.log(reg6.test('a')); // false
+    console.log(reg6.test(''));// false
+    console.log(reg6.test('aaa'));// true
+    console.log(reg6.test('aaaaaaaa'));// false
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  边界符:1.单词边界 2.字符串边界
+  <script>
+  // 1. 单词边界
+  //eg: The cat scattered his food all over the room.
+  // 用/cat/正则匹配就匹配到cat和scattered里的cat
+  const reg = /cat/g
+  const str = 'The cat scattered his food all over the room.'
+  console.log(str.match(reg));//['cat', 'cat']
+  console.log(str.replace(reg, 'dog'));//The dog sdogtered his food all over the room.
+  
+  // 单词边界\b ：匹配能构成单词的字符(\w)和不能构成单词的字符(\W)中间的位置
+  //句子中的 cat ，左右两个空格不构成单词，匹配不构成单词中间的字符，就是cat
+  const reg2 = /\bcat\b/
+  console.log(str.replace(reg2, 'dog'));//The dog scattered his food all over the room.
+  // 简单来说：就是匹配这个指定的单词
+
+
+
+  // 2.字符串边界  ^ $
+  // ^ :以xx开头
+  // ^a: 以a开头的字符串
+  const reg3 = /^a/
+  console.log(reg3.test('a'));// true
+  console.log(reg3.test('abc'));// true
+  console.log(reg3.test('bc'));// false
+  console.log(reg3.test('Abc'));// false
+
+  // $: 以xx结尾
+  // b$: 以b结尾
+  const reg4 = /c$/
+  console.log(reg4.test('abc'));// true
+  console.log(reg4.test('ab'));// false
+
+
+  // 精确匹配
+  const reg5 = /^a$/
+  console.log(reg5.test('a'));// true
+  console.log(reg5.test('aaa'));// false
+  </script>
+
+</body>
+</html>

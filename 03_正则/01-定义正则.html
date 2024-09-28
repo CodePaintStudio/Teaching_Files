@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // 语法：
+    // const 变量名 = /表达式/
+    // 1. 直接判断里面有没有 某个字段 
+    const reg = /前端/
+    //判断reg里有没有‘前端’这两个字
+    const reg2 = /学/g
+
+    // 2. 方法判断
+
+    // -----------test-----------
+    // 2.1 test 查看正则表达式与指定的字符串你像否匹配
+    // test 的返回值为 布尔值
+    const res = reg.test('学前端')//是正则对象上的方法，所以直接用reg.就行
+    console.log(res);// true: res中有reg
+
+    // -------------exec-----------
+    // 2.2 exec: 查找符合规则的字符串
+    const res1 = reg.exec('学前端')
+    console.log(res1);//['前端', index: 1, input: '学前端', groups: undefined]
+    //'前端'，是reg，也就是需要检测的内容
+    //index: 1，就是reg检测时，第一个内容的索引(位置)
+    //input: '学前端'，就是输入的内容
+    
+    
+
+    //-------------replace-------------
+    // 2.3 replace:替换字符串中符合规则的字符
+    // replace是字符串上的方法
+    const str = '学前端'//替换成'学java'
+    const res2 = str.replace(reg, 'java')//第一个参数被替换内容，第二个参数就是替换内容
+    //但是这样的替换这能替换第一个
+    console.log(res2);//学java
+    const str2 = '学前端，学前端好，学前端妙，学前端呱呱叫'
+    const res3 = str2.replace(reg, 'java')
+    console.log(res3);//学java，学前端好，学前端妙，学前端呱呱叫
+    
+    //修饰符g
+    //想要将所有内容替换，就需要在reg后面加上修饰符g，g就是全局进行匹配
+    const res4 = str2.replace(reg2, 'java')
+    console.log(res4);//java前端，java前端好，java前端妙，java前端呱呱叫
+    
+    //用处：将不文明用语换成***
+    const eg1 = /傻b/
+    const EgStr = '那边那个打篮球是傻b'
+    const Out = EgStr.replace(eg1, '**')
+    console.log(Out);//那边那个打篮球是**
+
+
+    //-------------match-------------
+    // 2.4 match: 可在字符串内检索指定的值，或者找到一个或多个正则表达式的匹配
+    // match是字符串上的方法
+    console.log(str2.match(reg));//['前端', index: 1, input: '学前端，学前端好，学前端妙，学前端呱呱叫', groups: undefined]
+    // 和exec输出内容一致
+    //因为是匹配的reg2,是全局进行匹配
+    console.log(str2.match(reg2));//['学', '学', '学', '学']
+    
+
+
+  </script>
+</body>
+</html>
