@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
+        background: #000;
+        /* 把鼠标剪头隐藏了 */
+        /* cursor: none; */
+    }
+
+    .pic {
+        width: 80px;
+        height: 20px;
+        background-color: aliceblue;
+        position: absolute;
+        pointer-events: none;
+    }
+</style>
+
+<body>
+    <div class="pic">图先欠着</div>
+
+    <script>
+        let pic = document.querySelector('.pic');
+        // 鼠标在pic的左上角在实际应用中是否会出现问题？
+
+        document.addEventListener('mousemove', () => {
+            pic.style.left = (event.pageX) + 'px';
+            pic.style.top = (event.pageY) + 'px';
+
+
+        });
+    </script>
+
+</body>
+
+</html>

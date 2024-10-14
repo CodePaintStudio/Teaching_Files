@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
+        background: #000;
+        /* 把鼠标隐藏了 */
+        cursor: none;
+    }
+
+    .pic {
+        width: 80px;
+        height: 20px;
+        background-color: aliceblue;
+        position: absolute;
+        z-index: 2;
+        pointer-events: none;
+
+    }
+
+
+    i {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        /* background-color: #a82323; */
+        background-color: #000;
+        border: 1px solid #fbf9f9;
+        z-index: 55;
+        scale: 1;
+        pointer-events: none;
+
+    }
+</style>
+
+<body>
+    <div class="pic">图先欠着</div>
+    <script>
+        let pic = document.querySelector('.pic');
+        document.addEventListener('mousemove', () => {
+
+            pic.style.left = (event.pageX) + 'px';
+            pic.style.top = (event.pageY) + 'px';
+            // 移动不断生成，需要写在监听函数中
+            let i = document.createElement('i');
+            // 在鼠标位置生成泡泡，所以坐标和刚才的一致
+            i.style.left = (event.pageX) + 'px';
+            i.style.top = (event.pageY) + 'px';
+            // 让泡泡有大有小，这里使用的是模板字符串，两头的不是引号
+            i.style.scale = `${Math.random() * 2 + 1}`;
+            
+            i.style.setProperty('--x',getRandomPosition())
+            document.body.appendChild(i);
+            // 计时器，两千毫秒之后消失，如果隐藏而不去掉的话可能会引起卡顿
+            setTimeout(() => {
+                document.body.removeChild(i)
+            }, 2000);
+        }); 
+
+    </script>
+
+</body>
+
+</html>

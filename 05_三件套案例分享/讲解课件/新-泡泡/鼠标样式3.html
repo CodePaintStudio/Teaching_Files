@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="样式1.css">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        /* 超出边界的隐藏 */
+        overflow: hidden;
+        background: #000;
+        /* 这里鼠标需要隐藏了不然图片上会出现一个小箭头 */
+        cursor: pointer;
+    }
+
+    .pic {
+        width: 80px;
+        height: 20px;
+        background-color: aliceblue;
+        position: absolute;
+        /* 这里要添加一个层次，让特殊的鼠标图案在最上层，以免被生成的泡泡挡住 */
+        z-index: 2;
+        pointer-events:none;
+
+    }
+
+    i {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        /* background-color: #a82323; */
+        /* 这里就用一个示意图了，泡泡的样式可以看个人喜好写 */
+        background-color: #000;
+        border: 1px solid #fbf9f9;
+        /* 刚才写了层次这里可以不写，有默认值 */
+        z-index: 1;
+        scale: 1;
+        pointer-events: none;
+        /* 给i加飞走的动画 ，2s后还没有飞出屏幕的话会消失，显得更有视觉效果*/
+        animation: animate 2s ease-in forwards;
+
+    }
+
+    @keyframes animate {
+        from{
+            transform: translate(0, 0);
+        }
+
+        to{
+            /* 这里自定义了两个css变量，xy是变量名，区别于平时使用的数值xy */
+            transform: translate(var(--x), var(--y));
+        }
+    }
+</style>
+
+<body>
+    <div class="pic">图先欠着</div>
+    <script>
+        document.addEventListener('mousemove', () => {
+            let pic = document.querySelector('.pic')
+            pic.style.left = (event.pageX-30) + 'px'
+            pic.style.top = (event.pageY-30) + 'px'
+            let i = document.createElement('i')
+            // 需要在鼠标位置生成泡泡，所以坐标和刚才的一致
+            i.style.left = (event.pageX) + 'px'
+            i.style.top = (event.pageY) + 'px'
+            // 让泡泡有大有小，两头的不是引号，这里容易出错
+            i.style.scale = `${Math.random() * 1.6 + 0.2}`
+
+
+            // 3，为生成的诸多个i元素增添飞出，消失的动画
+            // setProperty 方法是操作元素样式的一个非常强大和灵活的工具，可以用于动态样式更新和响应式设计。
+            //  element.style.setProperty('color', 'red', '！important');修改
+            // element.style.color='red'修改，使用，返回值
+            // setProperty 提供了更多的灵活性和控制，尤其是在处理CSS变量和需要设置样式优先级时。
+            // 直接修改 style 属性在大多数简单的样式操作中更方便快捷。
+
+
+            i.style.setProperty('--x', getRandomPosition())
+            i.style.setProperty('--y', getRandomPosition())
+            function getRandomPosition() {
+                // 这会使该元素的left样式属性被设置为一个 - 200到200之间的随机像素值。
+                // Math.random生成的是0到一的随机数，通常后面写*a+b就是生成a到b的随机数，负数出现问题
+                // 实际上后面就是添加的乘法和加法运算，
+          
+               
+
+                return `${Math.random() * 400 - 200}px`
+            }
+            document.body.appendChild(i);
+            // // 计时器，两千毫秒之后消失，如果修改样式隐藏而不直接去掉的话可能会引起卡顿
+            setTimeout(() => {
+                document.body.removeChild(i)
+            }, 2000)
+        });
+
+    </script>
+
+</body>
+
+</html>

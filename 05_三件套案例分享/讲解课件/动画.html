@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    div {
+        margin-top: 300px;
+        height: 20px;
+        background-color: pink;
+        /* 动画名 持续时间 缓动函数 动画开始时间 次数 动画后停留状态 */
+        animation: ani1 3s linear forwards;
+        /* animation: ani1 3s linear infinite alternate; */
+    }
+
+    @keyframes ani1 {
+        0% {
+            width: 0px;
+        }
+
+        30% {
+            width: 20px;
+        }
+
+        60% {
+            width: 20px;
+        }
+
+        100% {
+            width: 100px;
+        }
+    }
+
+    @keyframes ani2 {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 200px;
+        }
+    }
+</style>
+
+<body>
+    <div></div>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        display: flex;
+
+    }
+
+    .c1 {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        background-color: rgb(4, 248, 248);
+         /* 动画名 持续时间 缓动函数 动画开始时间 次数 动画后停留状态 */
+          /* animation: ani1 3s linear infinite alternate; */
+        /* animation: ani 2s linear infinite alternate; */
+    }
+
+    .c2 {
+        z-index: 2;
+        width: 80px;
+        height: 80px;
+        background-color: #789788;
+
+    }
+
+    @keyframes ani {
+       0%{
+background-color: blue;
+       }
+       30%{
+background-color: blanchedalmond;
+       }
+       50%{
+background-color: red;
+       }
+       100%{
+background-color: pink;
+       }
+
+    }
+</style>
+
+
+<body>
+    <div class="c1">1</div>
+    <div class="c2">2</div>
+
+    <script>
+        let c1 = document.querySelector('.c1')
+        let c2 = document.querySelector('.c2')
+
+        document.addEventListener('mousemove', () => {
+            c1.style.left = (event.pageX ) + 'px';
+            c1.style.top = (event.pageY ) + 'px';
+
+        })
+        c2.addEventListener('click', () => {
+            c2.style.animation = 'ani 3s linear infinite';
+        })
+    </script>
+</body>
+
+</html>
